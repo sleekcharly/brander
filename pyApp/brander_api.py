@@ -1,6 +1,11 @@
 from fastapi import FastAPI, HTTPException
 # Import brander app
 from brander import generate_branding_snippet, generate_keywords
+# Import Mangum
+from mangum import Mangum
+
+# handle function for lambda it invoke
+handler = Magnum(pyApp)
 
 app = FastAPI()
 
