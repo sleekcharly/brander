@@ -1,0 +1,5 @@
+# Python dependencies
+fastapi
+mangum
+openai
+requests

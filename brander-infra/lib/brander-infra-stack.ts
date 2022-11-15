@@ -12,7 +12,7 @@ export class BranderInfraStack extends cdk.Stack {
     const apiLambda = new lambda.Function(this, 'ApiFunction', {
       runtime: lambda.Runtime.PYTHON_3_9,
       // code to run in our lambda function
-      code: lambda.Code.fromAsset('../../pyApp'),
+      code: lambda.Code.fromAsset('../pyApp/'),
       // module it runs once the function is invoked
       handler: 'brander_api.handler',
     });

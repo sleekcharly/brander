@@ -4,10 +4,12 @@ from brander import generate_branding_snippet, generate_keywords
 # Import Mangum
 from mangum import Mangum
 
+app = FastAPI()
+
 # handle function for lambda it invoke
 handler = Magnum(pyApp)
 
-app = FastAPI()
+
 
 # Max input length
 MAX_INPUT_LENGTH = 32
