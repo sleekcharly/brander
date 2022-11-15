@@ -7,7 +7,7 @@ from mangum import Mangum
 app = FastAPI()
 
 # handle function for lambda it invoke
-handler = Magnum(pyApp)
+handler = Mangum(app)
 
 
 

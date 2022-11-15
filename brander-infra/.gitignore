@@ -10,3 +10,6 @@ cdk.out
 
 # zip files
 *.zip
+
+
+.env
