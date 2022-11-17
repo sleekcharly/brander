@@ -12,7 +12,7 @@ export default function Home() {
           name="description"
           content="Generate branding snippets for your product"
         />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
 
       <Brander />
