@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Form from './form';
 import Results from './results';
+import Image from 'next/image';
+// import logo image
+import logo from '../public/logo.svg';
 
 type Props = {};
 
@@ -74,13 +77,34 @@ const Brander = (props: Props) => {
     );
   }
 
-  return (
-    <>
-      <h1>Brander</h1>
-      {/* form component */}
+  //   set text style gradient
+  const gradientTextStyle =
+    'text-white text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500';
 
-      {displayedElement}
-    </>
+  return (
+    <div className="h-screen flex">
+      <div className="max-w-md m-auto p-2">
+        <div className="bg-slate-800 p-6 rounded-md text-white">
+          <div className="flex flex-col items-center my-6">
+            <Image
+              src={logo}
+              alt="Brander-app-image"
+              width={64}
+              height={64}
+              className="rounded-lg"
+            />
+            <h1 className={`${gradientTextStyle} text-3xl font-light w-fit`}>
+              Brander
+            </h1>
+            <div className={gradientTextStyle}>
+              Your AI tailored branding assistant
+            </div>
+          </div>
+          {/* displayed element */}
+          {displayedElement}
+        </div>
+      </div>
+    </div>
   );
 };
 
