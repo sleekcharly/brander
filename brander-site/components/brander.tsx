@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Form from './form';
+import Results from './results';
 
 type Props = {};
 
@@ -8,11 +10,15 @@ type ResultProps = {
 };
 
 const Brander = (props: Props) => {
+  // set charcterLimit
+  const characterLimit: number = 32;
+
   // set state parameters for the application
   const [prompt, setPrompt] = useState('');
   const [snippet, setSnippet] = useState('');
   const [keywords, setKeywords] = useState([]);
   const [hasResult, setHasResult] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   //   api endpoint
   const ENDPOINT: string =
@@ -23,45 +29,57 @@ const Brander = (props: Props) => {
     setSnippet(data.snippet);
     setKeywords(data.keywords);
     setHasResult(true);
+    setIsLoading(false);
   };
 
   //   function for handling submission of prompt
   const onSubmit = () => {
+    console.log('Submitting: ' + prompt);
+    setIsLoading(true);
+
     fetch(`${ENDPOINT}?prompt=${prompt}`)
       .then((res) => res.json())
       .then(onResult);
   };
 
-  //   Results element
-  let resultsElement = null;
+  // function to handle resetting set when the back button is clicked
+  const onReset = () => {
+    setPrompt('');
+    setHasResult(false);
+    setIsLoading(false);
+  };
 
-  //   populate resultsElement if hasResult is True
+  //   Results element
+  let displayedElement = null;
+
+  //   populate displayedElement if hasResult is True with Reselts or Form element
   if (hasResult) {
-    resultsElement = (
-      <div>
-        Here are your results:
-        <div>Snippet: {snippet}</div>
-        <div>Keywords: {keywords.join(',')}</div>
-      </div>
+    displayedElement = (
+      <Results
+        snippet={snippet}
+        keywords={keywords}
+        onBack={onReset}
+        prompt={prompt}
+      />
+    );
+  } else {
+    displayedElement = (
+      <Form
+        prompt={prompt}
+        onSubmit={onSubmit}
+        setPrompt={setPrompt}
+        characterLimit={characterLimit}
+        isLoading={isLoading}
+      />
     );
   }
 
   return (
     <>
       <h1>Brander</h1>
-      <p>
-        Tell me what your brand is about and I will generate copy and keywords
-        for you.
-      </p>
-      <input
-        type="text"
-        placeholder="shoes"
-        value={prompt}
-        onChange={(e) => setPrompt(e.currentTarget.value)}
-      ></input>
-      <button onClick={onSubmit}>Submit</button>
+      {/* form component */}
 
-      {resultsElement}
+      {displayedElement}
     </>
   );
 };
