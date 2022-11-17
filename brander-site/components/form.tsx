@@ -45,7 +45,7 @@ const Form = ({
       <input
         className="p-2 rounded-md w-full focus:outline-teal-400 text-slate-700"
         type="text"
-        placeholder="shoes"
+        placeholder="New gucci shoes"
         value={prompt}
         onChange={(e) => updatePromptValue(e.currentTarget.value)}
       ></input>
@@ -57,7 +57,7 @@ const Form = ({
       </div>
       <button
         className="bg-gradient-to-r from-teal-400 to-blue-500 disabled:opacity-50 w-full p-2 rounded-md text-lg"
-        disabled={isLoading || !isPromptValid}
+        disabled={isLoading || !isPromptValid || prompt.length == 0}
         onClick={onSubmit}
       >
         Submit
